@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+  }
+  section[id] {
+    scroll-margin-top: 4rem;
+  }
+  ::selection {
+    @apply bg-ink text-paper;
+  }
+}
+
+@layer components {
+  .pill {
+    @apply inline-flex items-center gap-2 rounded-lg border-2 border-ink bg-paper/80 px-3 py-1.5 text-sm font-medium backdrop-blur-sm transition-colors;
+  }
+  .card {
+    @apply rounded-2xl border-2 border-ink/90 bg-white/60 p-6 backdrop-blur-sm;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
