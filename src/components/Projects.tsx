@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { LuChevronLeft, LuChevronRight, LuMaximize2, LuX } from 'react-icons/lu'
-import { highlights, projects, type Project } from '../data'
-import Reveal from './Reveal'
+import { LuArrowUpRight, LuChevronLeft, LuChevronRight, LuX } from 'react-icons/lu'
+import { projects, type Project } from '../data'
 import SectionTitle from './SectionTitle'
 import { SkeletonImage } from './Skeleton'
+import Spotlight from './Spotlight'
 
 const filters = ['All', 'Web', 'Mobile'] as const
 
@@ -43,7 +43,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
       aria-label={project.title}
     >
       <motion.div
-        className="relative grid max-h-full w-full max-w-6xl overflow-y-auto rounded-2xl border-2 border-ink bg-paper lg:grid-cols-5"
+        className="relative grid max-h-full w-full max-w-6xl overflow-y-auto rounded-2xl border border-ink/20 bg-paper lg:grid-cols-5"
         initial={{ y: 40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 40, opacity: 0 }}
@@ -52,7 +52,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
         <button
           onClick={onClose}
           aria-label="Close"
-          className="absolute right-3 top-3 z-10 rounded-full border-2 border-ink bg-paper p-1.5"
+          className="absolute right-3 top-3 z-10 rounded-full border border-ink/20 bg-paper p-1.5 transition-colors hover:bg-ink/5"
         >
           <LuX size={18} />
         </button>
@@ -84,14 +84,14 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
                 <button
                   onClick={() => go(-1)}
                   aria-label="Previous image"
-                  className="absolute left-0 rounded-full border-2 border-ink bg-paper/90 p-1.5"
+                  className="absolute left-0 rounded-full border border-ink/20 bg-paper/90 p-1.5"
                 >
                   <LuChevronLeft size={20} />
                 </button>
                 <button
                   onClick={() => go(1)}
                   aria-label="Next image"
-                  className="absolute right-0 rounded-full border-2 border-ink bg-paper/90 p-1.5"
+                  className="absolute right-0 rounded-full border border-ink/20 bg-paper/90 p-1.5"
                 >
                   <LuChevronRight size={20} />
                 </button>
@@ -113,25 +113,133 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
         </div>
 
         <div className="p-6 lg:col-span-2 lg:p-8">
-          <h3 className="pr-8 text-2xl font-bold">{project.title}</h3>
-          <dl className="mt-4 space-y-1 text-sm">
+          <p className="label-mono">{project.type}</p>
+          <h3 className="mt-2 pr-8 text-2xl font-bold tracking-tight">{project.title}</h3>
+          <dl className="mt-4 space-y-1.5 text-sm">
             <div className="flex gap-2">
-              <dt className="font-bold">Category:</dt>
-              <dd>{project.category}</dd>
+              <dt className="font-semibold">Category:</dt>
+              <dd className="text-ink/70">{project.category}</dd>
             </div>
             <div className="flex gap-2">
-              <dt className="font-bold">Client:</dt>
-              <dd>{project.client}</dd>
+              <dt className="font-semibold">Client:</dt>
+              <dd className="text-ink/70">{project.client}</dd>
             </div>
             <div className="flex gap-2">
-              <dt className="font-bold">Project date:</dt>
-              <dd>{project.date}</dd>
+              <dt className="font-semibold">Project date:</dt>
+              <dd className="font-mono text-ink/70">{project.date}</dd>
             </div>
           </dl>
-          <p className="mt-5 leading-relaxed text-ink/80">{project.description}</p>
+          <p className="mt-5 leading-relaxed text-ink/70">{project.description}</p>
         </div>
       </motion.div>
     </motion.div>
+  )
+}
+
+function BrowserFrame({ project, flip }: { project: Project; flip: boolean }) {
+  return (
+    <div
+      className={`w-full max-w-[540px] transition-transform duration-500 ${
+        flip
+          ? '[transform:perspective(1400px)_rotateY(6deg)_rotateX(3deg)] group-hover:[transform:perspective(1400px)_rotateY(2deg)_rotateX(1deg)_scale(1.03)]'
+          : '[transform:perspective(1400px)_rotateY(-6deg)_rotateX(3deg)] group-hover:[transform:perspective(1400px)_rotateY(-2deg)_rotateX(1deg)_scale(1.03)]'
+      }`}
+    >
+      <div className="overflow-hidden rounded-xl border border-ink/15 bg-white shadow-2xl shadow-ink/20">
+        <div className="flex items-center gap-1.5 border-b border-ink/10 bg-slate-100 px-3 py-2">
+          <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
+          <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
+          <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+          <span className="ml-3 truncate rounded bg-white px-2 py-0.5 font-mono text-[10px] text-slate-500">
+            {project.category}
+          </span>
+        </div>
+        <div className="relative aspect-[16/10]">
+          <SkeletonImage
+            src={project.cover}
+            alt={project.title}
+            className="h-full w-full object-cover object-top"
+          />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function PhoneFrame({ project, flip }: { project: Project; flip: boolean }) {
+  return (
+    <div
+      className={`w-[210px] transition-transform duration-500 ${
+        flip
+          ? '[transform:perspective(1400px)_rotateY(8deg)] group-hover:[transform:perspective(1400px)_rotateY(2deg)_scale(1.04)]'
+          : '[transform:perspective(1400px)_rotateY(-8deg)] group-hover:[transform:perspective(1400px)_rotateY(-2deg)_scale(1.04)]'
+      }`}
+    >
+      <div className="overflow-hidden rounded-[2.2rem] border-[9px] border-[#0b1020] bg-[#0b1020] shadow-2xl shadow-ink/30">
+        <div className="relative aspect-[9/17] rounded-[1.5rem]">
+          <SkeletonImage
+            src={project.cover}
+            alt={project.title}
+            className="h-full w-full rounded-[1.5rem] object-cover object-top"
+          />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function ProjectCard({ project, index, onOpen }: { project: Project; index: number; onOpen: () => void }) {
+  const flip = index % 2 === 1
+
+  return (
+    <Spotlight
+      onClick={onOpen}
+      label={`Open ${project.title} gallery`}
+      className="group"
+      padding="p-0"
+    >
+      <div className="grid lg:grid-cols-2">
+        <div
+          className={`flex flex-col justify-between gap-8 p-7 md:p-10 ${flip ? 'lg:order-2' : ''}`}
+        >
+          <div>
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-xs text-ink/40">{String(index + 1).padStart(2, '0')}</span>
+              <span className="rounded-full border border-ink/10 px-2.5 py-0.5 font-mono text-[11px] uppercase tracking-wider text-accent">
+                {project.type}
+              </span>
+            </div>
+            <h3 className="mt-5 text-3xl font-bold tracking-tight md:text-4xl">{project.title}</h3>
+            <p className="mt-2 text-sm text-ink/60">
+              {project.client} · <span className="font-mono">{project.date}</span>
+            </p>
+            <p className="mt-5 line-clamp-4 leading-relaxed text-ink/70">{project.description}</p>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="font-mono text-xs text-ink/50">{project.images.length} screenshots</span>
+            <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent">
+              View gallery
+              <LuArrowUpRight
+                size={16}
+                className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
+            </span>
+          </div>
+        </div>
+
+        <div
+          className={`relative grid place-items-center overflow-hidden bg-gradient-to-br from-accent/10 via-transparent to-ink/5 p-8 md:p-12 ${
+            flip ? 'lg:order-1' : ''
+          }`}
+        >
+          {project.type === 'Mobile' ? (
+            <PhoneFrame project={project} flip={flip} />
+          ) : (
+            <BrowserFrame project={project} flip={flip} />
+          )}
+        </div>
+      </div>
+    </Spotlight>
   )
 }
 
@@ -141,76 +249,49 @@ export default function Projects() {
   const closeModal = useCallback(() => setSelected(null), [])
 
   const visible = projects.filter((p) => filter === 'All' || p.type === filter)
+  const count = (f: (typeof filters)[number]) =>
+    f === 'All' ? projects.length : projects.filter((p) => p.type === f).length
 
   return (
     <section id="project" className="mx-auto max-w-6xl px-5 py-20 md:px-8 md:py-28">
       <SectionTitle
+        index="04"
+        label="Projects"
         title="Project"
         subtitle="Here are some projects that I have worked on. Some of these projects are confidential, so I can only describe them in general terms."
       />
 
-      <Reveal className="mb-8 flex flex-wrap gap-3">
+      <div className="mb-8 flex flex-wrap gap-2">
         {filters.map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
-            className={`pill ${f === filter ? '!bg-ink !text-paper' : 'hover:!bg-paper'}`}
+            className={`rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors ${
+              f === filter ? 'border-ink bg-ink text-paper' : 'border-ink/15 hover:bg-ink/5'
+            }`}
           >
             {f}
+            <span className="ml-1.5 font-mono text-xs opacity-60">{count(f)}</span>
           </button>
         ))}
-      </Reveal>
+      </div>
 
-      <motion.div layout className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="space-y-6">
         <AnimatePresence mode="popLayout">
-          {visible.map((p) => (
-            <motion.button
+          {visible.map((p, i) => (
+            <motion.div
               layout
               key={p.id}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              onClick={() => setSelected(p)}
-              className="group overflow-hidden rounded-2xl border-2 border-ink bg-white/60 text-left dark:bg-white/5"
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              exit={{ opacity: 0, scale: 0.97 }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-ink/5">
-                <SkeletonImage
-                  src={p.cover}
-                  alt={p.title}
-                  className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                />
-                <span className="absolute right-3 top-3 rounded-full border-2 border-ink bg-paper p-1.5 opacity-0 transition-opacity group-hover:opacity-100">
-                  <LuMaximize2 size={16} />
-                </span>
-              </div>
-              <div className="p-5">
-                <p className="text-xs font-medium uppercase tracking-wider text-accent">{p.type}</p>
-                <h3 className="mt-1 text-lg font-bold">{p.title}</h3>
-                <p className="mt-1 text-sm text-ink/70">{p.client}</p>
-              </div>
-            </motion.button>
+              <ProjectCard project={p} index={i} onOpen={() => setSelected(p)} />
+            </motion.div>
           ))}
         </AnimatePresence>
-      </motion.div>
-
-      <div className="mt-20">
-        <Reveal>
-          <h3 className="mb-8 text-2xl font-bold md:text-3xl">Work Highlights</h3>
-        </Reveal>
-        <div className="grid gap-6 md:grid-cols-2">
-          {highlights.map((h, i) => (
-            <Reveal key={h.title} delay={(i % 2) * 0.1}>
-              <div className="card h-full">
-                <h4 className="mb-3 text-lg font-bold">{h.title}</h4>
-                <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed text-ink/80">
-                  {h.points.map((p) => (
-                    <li key={p}>{p}</li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          ))}
-        </div>
       </div>
 
       <AnimatePresence>

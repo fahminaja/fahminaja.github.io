@@ -191,13 +191,6 @@ export const projects: Project[] = [
 
 export const highlights = [
   {
-    title: 'RFID System in Warehouse',
-    points: [
-      'Develop web based application for efficiency while receiving and warehousing printer part named Goodscontrol.',
-      'Develop web based application for avoid potential box loss and controlling box actual location named Boxcontrol.',
-    ],
-  },
-  {
     title: 'Customs Audit Countermeasures / Logistic Management',
     points: [
       'Develop web based application for efficiency on creating BC 40 document based on Customs regulation named TPBExchange.',
@@ -215,7 +208,6 @@ export const highlights = [
     title: 'Purchasing',
     points: [
       'Create auditor sheet printing automation using Microsoft Power Automate on Stock Taking Project.',
-      'Create Automated RFQ to approval flow, from quotation requests to approval and archival (E-APC).',
     ],
   },
   {
@@ -225,3 +217,42 @@ export const highlights = [
     ],
   },
 ]
+
+export const eapc = {
+  name: 'E-APC',
+  fullName: 'Electronic Application Price Change',
+  summary:
+    'Price Change Application: Automated RFQ to approval flow, from quotation requests to approval and archival.',
+  description:
+    'Quotation documents for regular price changes used to run on paper, with manual approval from the quotation PIC to the Manager, GM and SGM. E-APC moves the whole flow online, including a mobile view that makes approving easier. Once SGM level has approved, the data that used to be keyed into SAP by hand is posted automatically by an RPA (ClickOnce).',
+  points: [
+    'Saved 23.75 hours/day (-2.97 FTE) → USD 166.25/day',
+    'Reduced paper usage by 73 sheets/day',
+    'Improved compliance, searchability, and minimized input errors',
+    'Served as PIC and led 3 team members; used across all purchasing divisions, SGM level, and 150+ global vendors',
+  ],
+}
+
+export const rfid = {
+  title: 'RFID System in Warehouse',
+  goodscontrol: {
+    name: 'RFID Goodscontrol',
+    description:
+      'Responsible for implementing RFID technology to streamline the parts receiving process between vendors and IEI, in both directions.',
+    points: [
+      'Reduced manpower by 16 warehouse staff, decreased man-hours in receiving and issue processes, and minimized line stops by parts delay in receiving, resulting in total savings of USD 447,754.86 annually',
+      'Facilitated easier monitoring of parts transactions between vendors/suppliers and IEI',
+      'The system has been implemented with 3 major vendors and 50+ vendors',
+    ],
+  },
+  boxcontrol: {
+    name: 'RFID Boxcontrol',
+    description:
+      'Implemented RFID technology for box location monitoring and RFID tag registration processes, integrated with RFID label printers.',
+    points: [
+      'Real-time tracking of the last recorded location of boxes from IEI and vendors',
+      'Achieved an 80% reduction in potential box losses out of 82,000 vendor boxes',
+      'Reduced penalty payments for lost boxes by up to USD 500K',
+    ],
+  },
+}

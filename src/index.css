@@ -39,8 +39,42 @@
   .pill {
     @apply inline-flex items-center gap-2 rounded-lg border-2 border-ink bg-paper/80 px-3 py-1.5 text-sm font-medium backdrop-blur-sm transition-colors;
   }
-  .card {
-    @apply rounded-2xl border-2 border-ink/90 bg-white/60 p-6 backdrop-blur-sm dark:bg-white/5;
+  .surface {
+    @apply rounded-2xl border border-ink/10 bg-white/70 backdrop-blur-sm transition-colors dark:bg-white/[0.04];
+    box-shadow:
+      0 1px 0 rgb(255 255 255 / 0.7) inset,
+      0 10px 30px -14px rgb(22 32 79 / 0.14);
+  }
+  .dark .surface {
+    box-shadow: 0 1px 0 rgb(255 255 255 / 0.04) inset;
+  }
+  .spotlight:hover {
+    @apply border-ink/25;
+  }
+  .spotlight-glow {
+    background: radial-gradient(
+      380px circle at var(--x, 50%) var(--y, 50%),
+      rgb(var(--accent) / 0.13),
+      transparent 60%
+    );
+  }
+  .spotlight:hover .spotlight-glow {
+    opacity: 1;
+  }
+  .bg-grid {
+    background-image:
+      linear-gradient(rgb(var(--ink) / 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--ink) / 0.045) 1px, transparent 1px),
+      radial-gradient(60rem 30rem at 50% -10%, rgb(var(--accent) / 0.1), transparent 70%);
+    background-size:
+      56px 56px,
+      56px 56px,
+      100% 100%;
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%);
+  }
+  .label-mono {
+    @apply font-mono text-xs font-medium uppercase tracking-[0.18em] text-accent;
   }
   .skeleton {
     position: relative;

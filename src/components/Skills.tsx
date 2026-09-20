@@ -76,7 +76,8 @@ export default function Skills() {
       <Reveal className="rounded-[2rem] bg-panel p-6 text-onpanel dark:ring-1 dark:ring-white/10 md:p-10">
         <div className="mb-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div>
-            <h2 className="text-3xl font-bold md:text-5xl">Skill.</h2>
+            <p className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-onpanel/50">02 / Skill</p>
+            <h2 className="mt-3 text-4xl font-bold tracking-tight md:text-6xl">Skill</h2>
             <p className="mt-2 text-onpanel/60">{all.length} technologies I work with</p>
           </div>
           <div className="flex flex-wrap gap-2">

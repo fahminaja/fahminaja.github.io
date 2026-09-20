@@ -9,8 +9,8 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="border-t-2 border-ink/80 px-5 py-12 text-center">
-      <h3 className="text-2xl font-bold">{profile.name}</h3>
+    <footer className="border-t border-ink/10 px-5 py-12 text-center">
+      <h3 className="text-2xl font-bold tracking-tight">{profile.name}</h3>
       <p className="mt-2 text-ink/70">{profile.tagline}</p>
       <div className="mt-5 flex justify-center gap-4">
         {socials.map((s) => (
@@ -20,7 +20,7 @@ export default function Footer() {
             target="_blank"
             rel="noreferrer"
             aria-label={s.label}
-            className="rounded-full border-2 border-ink p-2.5 transition-colors hover:bg-ink hover:text-paper"
+            className="rounded-full border border-ink/15 p-2.5 transition-colors hover:bg-ink hover:text-paper"
           >
             <s.icon size={18} />
           </a>
