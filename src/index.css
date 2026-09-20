@@ -3,11 +3,29 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --paper: 245 255 250;
+    --ink: 22 32 79;
+    --accent: 29 78 216;
+    --panel: 22 32 79;
+    --onpanel: 245 255 250;
+    --red: 220 38 38;
+    color-scheme: light;
+  }
+  .dark {
+    --paper: 9 13 31;
+    --ink: 226 232 255;
+    --accent: 110 168 254;
+    --panel: 19 27 64;
+    --onpanel: 226 232 255;
+    --red: 248 113 113;
+    color-scheme: dark;
+  }
   html {
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-paper font-sans text-ink antialiased;
+    @apply bg-paper font-sans text-ink antialiased transition-colors duration-300;
   }
   section[id] {
     scroll-margin-top: 4rem;
@@ -22,13 +40,13 @@
     @apply inline-flex items-center gap-2 rounded-lg border-2 border-ink bg-paper/80 px-3 py-1.5 text-sm font-medium backdrop-blur-sm transition-colors;
   }
   .card {
-    @apply rounded-2xl border-2 border-ink/90 bg-white/60 p-6 backdrop-blur-sm;
+    @apply rounded-2xl border-2 border-ink/90 bg-white/60 p-6 backdrop-blur-sm dark:bg-white/5;
   }
   .skeleton {
     position: relative;
     overflow: hidden;
     border-radius: 0.5rem;
-    background: rgb(22 32 79 / 0.09);
+    background: rgb(var(--ink) / 0.09);
   }
   .skeleton::after {
     content: '';
@@ -43,6 +61,12 @@
   }
   .skeleton-dark::after {
     background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.18), transparent);
+  }
+  .dark .skeleton::after {
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.08), transparent);
+  }
+  .dark .skeleton-dark::after {
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.12), transparent);
   }
 }
 

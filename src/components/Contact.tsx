@@ -6,7 +6,7 @@ import Reveal from './Reveal'
 import SectionTitle from './SectionTitle'
 
 const field =
-  'w-full rounded-lg border-2 border-ink/80 bg-white/70 px-4 py-2.5 outline-none transition-colors placeholder:text-ink/40 focus:border-accent'
+  'w-full rounded-lg border-2 border-ink/80 bg-white/70 dark:bg-white/5 px-4 py-2.5 outline-none transition-colors placeholder:text-ink/40 focus:border-accent'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })

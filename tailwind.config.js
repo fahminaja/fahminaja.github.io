@@ -1,12 +1,17 @@
 /** @type {import('tailwindcss').Config} */
+const c = (name) => `rgb(var(--${name}) / <alpha-value>)`
+
 export default {
+  darkMode: 'class',
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        paper: '#f5fffa',
-        ink: '#16204f',
-        accent: '#1d4ed8',
+        paper: c('paper'),
+        ink: c('ink'),
+        accent: c('accent'),
+        panel: c('panel'),
+        onpanel: c('onpanel'),
       },
       keyframes: {
         wave: {

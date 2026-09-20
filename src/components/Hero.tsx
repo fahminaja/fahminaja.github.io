@@ -34,7 +34,7 @@ function FloatLink({ href, icon: Icon, label, className, color, duration, extern
     <motion.a
       href={href}
       {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
-      className={`pill absolute z-30 hover:!bg-white ${className}`}
+      className={`pill absolute z-30 hover:!bg-paper ${className}`}
       style={{ color, borderColor: color }}
       animate={{ y: [0, -9, 0] }}
       transition={{ duration, repeat: Infinity, ease: 'easeInOut' }}
@@ -115,7 +115,7 @@ export default function Hero() {
               <div
                 className={`absolute inset-0 rounded-full ${
                   photoReady
-                    ? 'bg-gradient-to-br from-[#c3d4ff] via-[#d3f3ee] to-[#eafff4]'
+                    ? 'bg-gradient-to-br from-[#c3d4ff] via-[#d3f3ee] to-[#eafff4] dark:from-[#26357f] dark:via-[#1a3a66] dark:to-[#154254]'
                     : 'skeleton !rounded-full'
                 }`}
               />
@@ -188,7 +188,7 @@ export default function Hero() {
         href="#about"
         icon={LuUser}
         label="About"
-        color="#16204f"
+        color="rgb(var(--ink))"
         duration={3.4}
         className="bottom-[38%] right-3 md:bottom-[27%] md:right-[36%]"
       />
@@ -196,7 +196,7 @@ export default function Hero() {
         href="#skill"
         icon={LuCodeXml}
         label="Skill"
-        color="#16204f"
+        color="rgb(var(--ink))"
         duration={4.1}
         className="bottom-[30%] right-10 md:bottom-[16%] md:right-[29%]"
       />
@@ -205,7 +205,7 @@ export default function Hero() {
         external
         icon={FaLinkedin}
         label="LinkedIn"
-        color="#1d4ed8"
+        color="rgb(var(--accent))"
         duration={3.8}
         className="bottom-[22%] right-4 md:bottom-[29%] md:right-[13%]"
       />
@@ -214,7 +214,7 @@ export default function Hero() {
         external
         icon={FaInstagram}
         label="Instagram"
-        color="#dc2626"
+        color="rgb(var(--red))"
         duration={4.4}
         className="bottom-[14%] right-2 md:bottom-[19%] md:right-[7%]"
       />
@@ -223,7 +223,7 @@ export default function Hero() {
         external
         icon={FaGithub}
         label="GitHub"
-        color="#111827"
+        color="rgb(var(--ink))"
         duration={3.2}
         className="bottom-[6%] right-8 md:bottom-[8%] md:right-[15%]"
       />

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { LuMenu, LuX } from 'react-icons/lu'
 import { profile } from '../data'
+import ThemeToggle from './ThemeToggle'
 
 const links = [
   { id: 'home', label: 'Home.' },
@@ -66,16 +67,20 @@ export default function Navbar() {
               {l.label}
             </a>
           ))}
+          <ThemeToggle />
         </nav>
 
-        <button
-          className="p-1 md:hidden"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <LuX size={26} /> : <LuMenu size={26} />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            className="p-1"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <LuX size={26} /> : <LuMenu size={26} />}
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>

@@ -73,11 +73,11 @@ export default function Skills() {
 
   return (
     <section id="skill" className="mx-auto max-w-6xl px-5 py-20 md:px-8 md:py-28">
-      <Reveal className="rounded-[2rem] bg-ink p-6 text-paper md:p-10">
+      <Reveal className="rounded-[2rem] bg-panel p-6 text-onpanel dark:ring-1 dark:ring-white/10 md:p-10">
         <div className="mb-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div>
             <h2 className="text-3xl font-bold md:text-5xl">Skill.</h2>
-            <p className="mt-2 text-paper/60">{all.length} technologies I work with</p>
+            <p className="mt-2 text-onpanel/60">{all.length} technologies I work with</p>
           </div>
           <div className="flex flex-wrap gap-2">
             {categories.map((c) => (
@@ -86,8 +86,8 @@ export default function Skills() {
                 onClick={() => setActive(c)}
                 className={`rounded-lg border-2 px-3 py-1 text-sm font-medium transition-colors ${
                   active === c
-                    ? 'border-paper bg-paper text-ink'
-                    : 'border-paper/30 text-paper/80 hover:border-paper/70'
+                    ? 'border-onpanel bg-onpanel text-panel'
+                    : 'border-onpanel/30 text-onpanel/80 hover:border-onpanel/70'
                 }`}
               >
                 {c}
@@ -110,7 +110,7 @@ export default function Skills() {
                   exit={{ opacity: 0, scale: 0.9 }}
                   whileHover={{ y: -6, borderColor: color, boxShadow: `0 14px 28px -14px ${color}` }}
                   style={{ borderColor: '#60a5fa' }}
-                  className="flex h-32 cursor-default flex-col items-center justify-center gap-3 rounded-xl border-2 bg-paper px-2 text-center text-ink md:h-36"
+                  className="flex h-32 cursor-default flex-col items-center justify-center gap-3 rounded-xl border-2 bg-[#f5fffa] px-2 text-center text-[#16204f] md:h-36"
                 >
                   <Icon size={44} style={{ color }} />
                   <span className="text-xs font-bold leading-tight">{s.name}</span>

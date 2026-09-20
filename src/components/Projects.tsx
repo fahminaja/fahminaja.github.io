@@ -33,7 +33,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
 
   return (
     <motion.div
-      className="fixed inset-0 z-[60] flex items-center justify-center bg-ink/60 p-3 backdrop-blur-sm md:p-8"
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 p-3 backdrop-blur-sm md:p-8"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -154,7 +154,7 @@ export default function Projects() {
           <button
             key={f}
             onClick={() => setFilter(f)}
-            className={`pill ${f === filter ? '!bg-ink !text-paper' : 'hover:!bg-white'}`}
+            className={`pill ${f === filter ? '!bg-ink !text-paper' : 'hover:!bg-paper'}`}
           >
             {f}
           </button>
@@ -171,7 +171,7 @@ export default function Projects() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               onClick={() => setSelected(p)}
-              className="group overflow-hidden rounded-2xl border-2 border-ink bg-white/60 text-left"
+              className="group overflow-hidden rounded-2xl border-2 border-ink bg-white/60 text-left dark:bg-white/5"
             >
               <div className="relative aspect-[4/3] overflow-hidden bg-ink/5">
                 <SkeletonImage

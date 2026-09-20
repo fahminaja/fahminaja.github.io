@@ -9,7 +9,7 @@ function Title() {
 export function SkillsSkeleton() {
   return (
     <section id="skill" className={wrap} aria-busy="true" aria-label="Loading skills">
-      <div className="rounded-[2rem] bg-ink p-6 md:p-10">
+      <div className="rounded-[2rem] bg-panel p-6 dark:ring-1 dark:ring-white/10 md:p-10">
         <div className="mb-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div className="space-y-3">
             <Skeleton dark className="h-10 w-40 md:h-12" />
