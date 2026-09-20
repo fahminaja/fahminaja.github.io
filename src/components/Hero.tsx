@@ -67,6 +67,22 @@ export default function Hero() {
     my.set(0)
   }
 
+  const [photoReady, setPhotoReady] = useState(false)
+
+  useEffect(() => {
+    let alive = true
+    photos.forEach((src, i) => {
+      const img = new Image()
+      img.onload = img.onerror = () => {
+        if (alive && i === 0) setPhotoReady(true)
+      }
+      img.src = src
+    })
+    return () => {
+      alive = false
+    }
+  }, [])
+
   useEffect(() => {
     const timer = window.setInterval(() => setIndex((i) => (i + 1) % photos.length), 4500)
     return () => window.clearInterval(timer)
@@ -92,10 +108,17 @@ export default function Hero() {
         <div className="absolute inset-x-0 bottom-[6svh] flex justify-center">
           <motion.div style={{ x: circleX, y: circleY }}>
             <motion.div
-              className="relative h-[60vw] w-[60vw] rounded-full bg-gradient-to-br from-[#c3d4ff] via-[#d3f3ee] to-[#eafff4] md:h-[62svh] md:w-[62svh]"
+              className="relative h-[60vw] w-[60vw] md:h-[62svh] md:w-[62svh]"
               animate={{ scale: [1, 1.04, 1] }}
               transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
             >
+              <div
+                className={`absolute inset-0 rounded-full ${
+                  photoReady
+                    ? 'bg-gradient-to-br from-[#c3d4ff] via-[#d3f3ee] to-[#eafff4]'
+                    : 'skeleton !rounded-full'
+                }`}
+              />
               <span className="absolute -inset-3 rounded-full border-2 border-ink/15 md:-inset-5" />
             </motion.div>
           </motion.div>
@@ -103,21 +126,23 @@ export default function Hero() {
 
         <motion.div className="absolute inset-0" style={{ x: photoX }}>
           <AnimatePresence>
-            <motion.div
-              key={index}
-              className="absolute inset-x-0 bottom-0 flex justify-center"
-              initial={{ opacity: 0, scale: 0.97 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.02 }}
-              transition={{ duration: 1.1, ease: 'easeInOut' }}
-            >
-              <img
-                src={photos[index]}
-                alt={`${profile.name} portrait ${index + 1}`}
-                className={`max-w-none object-contain object-bottom ${photoStyle[index] ?? photoStyle[0]}`}
-                draggable={false}
-              />
-            </motion.div>
+            {photoReady && (
+              <motion.div
+                key={index}
+                className="absolute inset-x-0 bottom-0 flex justify-center"
+                initial={{ opacity: 0, scale: 0.97 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.02 }}
+                transition={{ duration: 1.1, ease: 'easeInOut' }}
+              >
+                <img
+                  src={photos[index]}
+                  alt={`${profile.name} portrait ${index + 1}`}
+                  className={`max-w-none object-contain object-bottom ${photoStyle[index] ?? photoStyle[0]}`}
+                  draggable={false}
+                />
+              </motion.div>
+            )}
           </AnimatePresence>
         </motion.div>
       </div>

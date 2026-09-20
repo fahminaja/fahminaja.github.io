@@ -4,6 +4,7 @@ import { LuChevronLeft, LuChevronRight, LuMaximize2, LuX } from 'react-icons/lu'
 import { highlights, projects, type Project } from '../data'
 import Reveal from './Reveal'
 import SectionTitle from './SectionTitle'
+import { SkeletonImage } from './Skeleton'
 
 const filters = ['All', 'Web', 'Mobile'] as const
 
@@ -59,18 +60,24 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
         <div className="relative flex flex-col bg-ink/5 p-4 lg:col-span-3">
           <div className="relative flex min-h-[260px] flex-1 items-center justify-center md:min-h-[420px]">
             <AnimatePresence mode="wait">
-              <motion.img
+              <motion.div
                 key={slide}
-                src={project.images[slide]}
-                alt={`${project.title} screenshot ${slide + 1}`}
-                className={`rounded-lg object-contain ${
-                  isMobile ? 'max-h-[60vh]' : 'max-h-[55vh]'
-                } max-w-full`}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.25 }}
-              />
+              >
+                <SkeletonImage
+                  src={project.images[slide]}
+                  alt={`${project.title} screenshot ${slide + 1}`}
+                  className={`max-w-full rounded-lg object-contain ${
+                    isMobile ? 'max-h-[60vh]' : 'max-h-[55vh]'
+                  }`}
+                  placeholderClassName={
+                    isMobile ? 'h-[50vh] w-56' : 'h-[40vh] w-[min(70vw,520px)]'
+                  }
+                />
+              </motion.div>
             </AnimatePresence>
             {total > 1 && (
               <>
@@ -167,10 +174,9 @@ export default function Projects() {
               className="group overflow-hidden rounded-2xl border-2 border-ink bg-white/60 text-left"
             >
               <div className="relative aspect-[4/3] overflow-hidden bg-ink/5">
-                <img
+                <SkeletonImage
                   src={p.cover}
                   alt={p.title}
-                  loading="lazy"
                   className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                 />
                 <span className="absolute right-3 top-3 rounded-full border-2 border-ink bg-paper p-1.5 opacity-0 transition-opacity group-hover:opacity-100">

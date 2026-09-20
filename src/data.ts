@@ -19,20 +19,14 @@ export const profile = {
 export const photos = ['/img/myphoto1.png', '/img/myphoto2.png']
 
 export const skills = [
-  { title: 'Front End', items: ['VueJS', 'ReactJS', 'JQuery', 'Kendo Telerik UI'] },
-  {
-    title: 'Back End',
-    items: ['ASP .NET / .NET Core', 'Node JS / Express JS / Prisma JS', 'PHP CodeIgniter'],
-  },
+  { title: 'Front End', items: ['React', 'Vue.js', 'jQuery', 'Kendo UI'] },
+  { title: 'Back End', items: ['.NET / ASP.NET', 'Node.js', 'Express.js', 'Prisma', 'CodeIgniter'] },
   { title: 'Database', items: ['SQL Server', 'MySQL'] },
   {
     title: 'Languages',
-    items: ['C#', 'PHP', 'JavaScript', 'TypeScript', 'YAML (CI/CD)', 'HTML5 / CSS'],
+    items: ['C#', 'PHP', 'JavaScript', 'TypeScript', 'YAML', 'HTML5', 'CSS3'],
   },
-  {
-    title: 'Tools',
-    items: ['SAP Tracker RPA', 'Power Automate', 'SQL Server Integration Services', 'Selenium'],
-  },
+  { title: 'Tools', items: ['SAP Tracker RPA', 'Power Automate', 'SSIS', 'Selenium'] },
   { title: 'Workspace', items: ['GitLab', 'GitHub', 'Azure DevOps'] },
 ]
 
